@@ -2,6 +2,9 @@ from dataclasses import dataclass
 from typing import Any
 
 
+MISSING = object()
+
+
 class Dictionary:
     def __init__(self) -> None:
         self.capacity = 8
@@ -59,13 +62,13 @@ class Dictionary:
         self.table = [None] * self.capacity
         self.length = 0
 
-    def pop(self, key: Any, default: Any = None) -> Any:
+    def pop(self, key: Any, default: Any = MISSING) -> Any:
         try:
             value = self[key]
             del self[key]
             return value
         except KeyError:
-            if default is None:
+            if default is MISSING:
                 raise KeyError(key)
             return default
 
