@@ -59,14 +59,14 @@ class Dictionary:
         self.table = [None] * self.capacity
         self.length = 0
 
-    def pop(self, key: Any, default: Any = None) -> None:
+    def pop(self, key: Any, default: Any = None) -> Any:
         try:
-            value = self[key]  # використовує твоє __getitem__
-            del self[key]  # використовує твій __delitem__
+            value = self[key]
+            del self[key]
             return value
         except KeyError:
             if default is None:
-                raise KeyError
+                raise KeyError(key)
             return default
 
     def resize(self) -> None:
